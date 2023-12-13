@@ -6,8 +6,11 @@ import { Heading } from '../../components/Heading';
 
 import Spam from '../Spam';
 import Guessed from '../Guessed';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+	const navigate = useNavigate();
+	
 	const [mail, setMail] = useState('');
 	const [login, setLogin] = useState(false);
 	const [spam, setSpam] = useState(false);
@@ -19,6 +22,7 @@ function Home() {
 		function () {
 			if (mail === 'adminlogin') {
 				setLogin((val) => !val);
+				
 			}
 			if (mail !== 'adminlogin') {
 				setLogin(false);
@@ -60,6 +64,9 @@ function Home() {
 		[mail]
 	);
 
+	function loginHandler(){
+		navigate('/login');
+	}
 	function guessHandler() {
 		setGuessDisplay((guess) => !guess);
 	}
@@ -85,7 +92,7 @@ function Home() {
 
 	return (
 		<>
-			<Heading text={'Emailer'} />
+			<Heading text={'Mail Defender 📧'} />
 			<Textarea
 				value={mail}
 				onChange={(e) => setMail(e.target.value)}
@@ -112,7 +119,7 @@ function Home() {
 				) : null}
 			</div>
 
-			{login ? <Button className={'mt-2'}>Login</Button> : null}
+			{login ? <Button className={'mt-2'} onClick={()=>loginHandler()}>Login</Button> : null}
 			{result && guessDisplay ? <Guessed guessHandler={guessHandler} /> : null}
 			<p className={'mt-8 font-semibold pb-5'}>Made by Ayush Rajput with 💓</p>
 		</>

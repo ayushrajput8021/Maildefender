@@ -9,7 +9,7 @@ export default function Guessed({ guessHandler }: GuessedProps) {
 	return (
 		<div className={'border rounded p-5 border-cyan-50 border-solid mt-2'}>
 			<div className={'flex flex-row '}>
-				<p className={'mb-3'}>Does Emailer guessed it right ?</p>
+				<p className={'mb-3'}>Does Mail Defender guessed it right ?</p>
 				<CrossCircledIcon
 					className={'ml-24 mb-5 cursor-pointer'}
 					onClick={() => guessHandler()}
