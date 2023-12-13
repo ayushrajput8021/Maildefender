@@ -15,7 +15,7 @@ export default function Login() {
 	async function loginHandler(){
 		try {
 			const data = { username,password };
-			const res = await fetch('http://127.0.0.1:3000/login', {
+			const res = await fetch(import.meta.env.VITE_BACKEND_URL+'/login', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

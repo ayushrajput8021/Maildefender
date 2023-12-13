@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Pages/Home';
 import Login from './components/Pages/Login';
 import Admin from './components/Pages/Admin';
+import AccTable from './components/AccTable';
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 						<Route path='/' element={<Home />} />
 						<Route path='/login' element={<Login />} />
 						<Route path='/admin' element={<Admin />} />
+						<Route path='/acc-data' element={<AccTable />} />
 					</Routes>
 				}
 			</ThemeProvider>

@@ -36,7 +36,7 @@ function Home() {
 			const controller = new AbortController();
 			const handleClick = async () => {
 				const data = { message: mail };
-				const res = await fetch('http://127.0.0.1:3000/predict', {
+				const res = await fetch(import.meta.env.VITE_BACKEND_URL+'/predict', {
 					signal: controller.signal,
 					method: 'POST',
 					headers: {
