@@ -8,12 +8,18 @@ export default function Admin() {
 	function accHandler(){
 		navigate('/acc-data')
 	}
+	function maildataHandler(){
+		navigate('/mail-data')
+	}
+	function trainHandler(){
+		navigate('/train')
+	}
 	return (
 		<div>
 			<Heading text={'Admin Panel'}/>
 			<Button variant="secondary" size={'lg'} className='mr-5' onClick={accHandler}>Accuracy Data</Button>
-			<Button variant="secondary" size={'lg'} className='mr-5' >Train Model</Button>
-			<Button variant="secondary" size={'lg'} >New Mails Data</Button>
+			<Button variant="secondary" size={'lg'} className='mr-5' onClick={trainHandler}>Train Model</Button>
+			<Button variant="secondary" size={'lg'} onClick={maildataHandler}>New Mails Data</Button>
 		</div>
 	);
 }

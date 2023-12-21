@@ -3,19 +3,30 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Heading } from '../Heading';
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login() {
-	const navigate = useNavigate();
-	
-	const [username, setUsername] = useState('');
-	const [password, setPassword] = useState('');
+interface LoginProps {
+	setUsername: React.Dispatch<SetStateAction<string>>;
+	setPassword: React.Dispatch<SetStateAction<string>>;
+	username: string;
+	password: string;
+}
 
-	async function loginHandler(){
+export default function Login({
+	setPassword,
+	setUsername,
+	username,
+	password,
+}: LoginProps) {
+	const navigate = useNavigate();
+
+	const [loading, setLoading] = useState(false);
+	async function loginHandler() {
 		try {
-			const data = { username,password };
-			const res = await fetch(import.meta.env.VITE_BACKEND_URL+'/login', {
+			setLoading(true);
+			const data = { username, password };
+			const res = await fetch(import.meta.env.VITE_BACKEND_URL + '/login', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -28,12 +39,8 @@ export default function Login() {
 			}
 
 			const resData = await res.json();
-			console.log(resData);
-			
-			if(resData.Status==='Authenticated')
-			navigate('/admin')
-			
-			
+			setLoading(false);
+			if (resData.Status === 'Authenticated') navigate('/admin');
 		} catch (error) {
 			console.error('Error fetching auth:', error);
 		}
@@ -42,7 +49,11 @@ export default function Login() {
 	return (
 		<>
 			<Heading text='Admin Login' />
-			<Card className='mt-32 w-72'>
+			<Button
+				variant='outline'
+				onClick={() => navigate('/')}
+			>Home</Button>
+			<Card className='mt-16 w-72'>
 				<CardContent className='grid gap-4 pt-6'>
 					<div className='grid gap-2'>
 						<Label htmlFor='email'>Username</Label>
@@ -66,9 +77,20 @@ export default function Login() {
 					</div>
 				</CardContent>
 				<CardFooter>
-					<Button className='w-full' variant='outline' id='login-btn' onClick={()=>loginHandler()}>
-						Login
-					</Button>
+					{loading ? (
+						<Button className='w-full' variant='outline' disabled>
+							Wait
+						</Button>
+					) : (
+						<Button
+							className='w-full'
+							variant='outline'
+							id='login-btn'
+							onClick={() => loginHandler()}
+						>
+							Login
+						</Button>
+					)}
 				</CardFooter>
 			</Card>
 		</>

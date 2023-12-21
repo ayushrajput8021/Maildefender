@@ -120,7 +120,7 @@ function Home() {
 			</div>
 
 			{login ? <Button className={'mt-2'} onClick={()=>loginHandler()}>Login</Button> : null}
-			{result && guessDisplay ? <Guessed guessHandler={guessHandler} /> : null}
+			{result && guessDisplay ? <Guessed guessHandler={guessHandler} spam={spam} mail={mail}/> : null}
 			<p className={'mt-8 font-semibold pb-5'}>Made by Ayush Rajput with 💓</p>
 		</>
 	);
