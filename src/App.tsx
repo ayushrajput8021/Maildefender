@@ -22,7 +22,7 @@ function App() {
 							path='/login'
 							element={<Login username={username} password={password} setUsername={setUsername} setPassword={setPassword}/>}
 						/>
-						<Route path='/admin' element={<Admin />} />
+						<Route path='/admin' element={<Admin username={username} password={password}/>} />
 						<Route path='/acc-data' element={<AccTable username={username} password={password}/>} />
 						<Route path='/mail-data' element={<NewMail username={username} password={password}/>} />
 						<Route path='/train' element={<Train username={username} password={password} />} />
